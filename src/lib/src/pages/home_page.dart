@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 import 'package:template_app/src/pages/recommendations_page.dart';
 
 import '../models/user_preferences.dart';
-import '../themes/theme_provider.dart';
 import 'home_screen.dart';
 import 'notifications_page.dart';
 import 'user_proferences_page.dart';
@@ -45,8 +43,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeProvider theme = Provider.of<ThemeProvider>(context);
-
     return SafeArea(
       child: Scaffold(
         body: SizedBox(
@@ -69,7 +65,6 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: BottomNavigationBar(
-                  backgroundColor: theme.getControlColor(),
                   currentIndex: _selectedIndex,
                   type: BottomNavigationBarType.fixed,
                   items: [
@@ -95,7 +90,6 @@ class _HomePageState extends State<HomePage> {
                       _selectedIndex = index;
                     });
                   },
-                  selectedItemColor: theme.getSelectedIconColor(),
                   unselectedItemColor: Colors.grey,
                 )),
           ),

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
-
 import 'models/user_preferences.dart';
-import 'providers/language_provider.dart';
 import 'routes/router.dart';
 import 'routes/routes.dart';
 import 'services/push_notifications_service.dart';
@@ -34,32 +31,6 @@ class _MyAppState extends State<MyApp> with RouterMixin {
   @override
   void initState() {
     super.initState();
-    //local notifications
-
-    const initilizationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
-
-    const initizlizationSettingsIOS = DarwinInitializationSettings();
-
-    const initializationSettings = InitializationSettings(
-      android: initilizationSettingsAndroid,
-      iOS: initizlizationSettingsIOS,
-    );
-
-    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-    );
-
-    // push notifications
-    PushNotificationsService.messageStream.listen((message) {
-      /* const snackbar = SnackBar(
-        content: Text('Tenes una nueva notificación'),
-        backgroundColor: Colors.red,
-      );
-      messengerKey.currentState?.showSnackBar(snackbar); */
-      showNotificationAlert(message);
-    });
   }
 
   Future showNotificationAlert(String? payload) async {
@@ -107,32 +78,25 @@ class _MyAppState extends State<MyApp> with RouterMixin {
     return AnimatedBuilder(
       animation: widget.settingsController,
       builder: (BuildContext context, Widget? child) {
-        final themeProvider = Provider.of<ThemeProvider>(context);
-        final languageProvider = Provider.of<LanguageProvider>(context);
-
-        return ChangeNotifierProvider<LanguageProvider>(
-          create: (_) => languageProvider,
-          child: MaterialApp.router(
-            routerConfig: myRouter,
-            scaffoldMessengerKey: messengerKey,
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en', ''),
-              Locale('es', ''),
-            ],
-            locale: Locale(UserPreferences().selectedLanguage),
-            themeMode: themeProvider.themeMode,
-            theme: UserPreferences().isDarkModeOn
-                ? MyThemes.darkTheme
-                : MyThemes.lightTheme,
-            darkTheme: MyThemes.darkTheme,
-          ),
+        return MaterialApp.router(
+          routerConfig: myRouter,
+          scaffoldMessengerKey: messengerKey,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('es', ''),
+          ],
+          locale: Locale(UserPreferences().selectedLanguage),
+          theme: UserPreferences().isDarkModeOn
+              ? MyThemes.darkTheme
+              : MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
         );
       },
     );

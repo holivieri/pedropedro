@@ -34,11 +34,16 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: <Widget>[
+        children: [
           Container(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 35),
           ),
-          const Text('With assets mp4'),
+          const Text(
+            'NOOOO!!!',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
           Container(
             padding: const EdgeInsets.all(20),
             child: AspectRatio(

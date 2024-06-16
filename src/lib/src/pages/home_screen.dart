@@ -35,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 5,
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.lightBlueAccent,
+            fixedSize: const Size(350, 30),
           ),
           onPressed: () {
             GoRouter.of(context).pushNamed(Routes.resultRoute);
@@ -46,12 +47,37 @@ class _HomeScreenState extends State<HomeScreen> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 5,
-            backgroundColor: Colors.red,
+            fixedSize: const Size(350, 30),
+            backgroundColor: Colors.lightBlueAccent,
           ),
           onPressed: () {
             GoRouter.of(context).pushNamed(Routes.resultRoute);
           },
           child: const Text('¿Puedo comprar boludeces?'),
+        ),
+        const SizedBox(height: 10),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 5,
+            fixedSize: const Size(350, 30),
+            backgroundColor: Colors.lightBlueAccent,
+          ),
+          onPressed: () {
+            GoRouter.of(context).pushNamed(Routes.resultRoute);
+          },
+          child: const Text('¿Vemos las finanzas en Excel?'),
+        ),
+        const SizedBox(height: 10),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 5,
+            fixedSize: const Size(350, 30),
+            backgroundColor: Colors.lightBlueAccent,
+          ),
+          onPressed: () {
+            GoRouter.of(context).pushNamed(Routes.resultRoute);
+          },
+          child: const Text('¿Hay que ahorrar?'),
         ),
       ],
     );
